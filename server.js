@@ -60,7 +60,7 @@ app.post('/scrape', async (req, res) => {
         const content = $(elem).html();
         if (src) {
           if (contains(src, 'react')) technologies.push('React');
-          if (contains(src, 'vue')) technologies.push('Vue.js');s
+          if (contains(src, 'vue')) technologies.push('Vue.js');
           if (contains(src, 'angular')) technologies.push('Angular');
           if (contains(src, 'jquery')) technologies.push('jQuery');
           if (contains(src, 'bootstrap')) technologies.push('Bootstrap');
