@@ -26,7 +26,13 @@ app.get('/api', (req, res) => {
   res.json({ message: 'Server is running!3' });
 });
 
-app.post('/scrape', async (req, res) => {
+// app.post('/api/scrape', (req, res) => {
+//   // Sua lógica de scraping aqui
+//   res.json({ message: "Scraping endpoint" });
+// });
+
+
+app.post('/api/scrape', async (req, res) => {
   try {
     const { url } = req.body;
     const response = await axios.get(url);
