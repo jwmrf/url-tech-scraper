@@ -73,7 +73,7 @@ export default {
         this.siteType = '';
         this.screenshotUrl = '';
         this.error = '';
-        const response = await axios.post('https://url-tech-scraper.wilsonfilho.site/scrape', { url: this.url });
+        const response = await axios.post('https://url-tech-scraper.wilsonfilho.site/api/scrape', { url: this.url });
         this.technologies = response.data.technologies;
         this.siteType = response.data.siteType;
         this.screenshotUrl = response.data.screenshotUrl;
