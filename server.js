@@ -14,6 +14,10 @@ app.use(cors());
 app.use(express.json());
 app.use('/screenshots', express.static('screenshots'));
 
+app.get('/api/test', (req, res) => {
+  res.json({ message: 'Server is running!' });
+});
+
 app.post('/scrape', async (req, res) => {
   try {
     const { url } = req.body;
