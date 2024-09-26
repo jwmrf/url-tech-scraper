@@ -15,8 +15,17 @@ app.use(express.json());
 app.use('/screenshots', express.static('screenshots'));
 
 app.get('/api/test', (req, res) => {
-  res.json({ message: 'Server is running!' });
+  res.json({ message: 'Server is running!2' });
 });
+
+app.get('/', (req, res) => {
+  res.json({ message: 'Server is running!1' });
+});
+
+app.get('/api', (req, res) => {
+  res.json({ message: 'Server is running!3' });
+});
+
 
 app.post('/scrape', async (req, res) => {
   try {
