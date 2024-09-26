@@ -26,6 +26,11 @@ app.get('/api', (req, res) => {
   res.json({ message: 'Server is running!3' });
 });
 
+app.post('/api/scrape', (req, res) => {
+  // Sua lógica de scraping aqui
+  res.json({ message: "Scraping endpoint" });
+});
+
 
 app.post('/scrape', async (req, res) => {
   try {
