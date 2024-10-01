@@ -32,7 +32,8 @@
     </div>
     <div class="input-container">
       <input v-model="url" :placeholder="$t('inputPlaceholder')">
-      <button @click="scrapeUrl">{{ $t('analyzeButton') }}</button>
+      <button :disabled="isLoading || !url" @click="scrapeUrl">{{ $t('analyzeButton') }}</button>
+      <div v-if="isLoading" class="loading">{{ $t('loading') }}</div>
     </div>
     <div class="results-container">
       <div v-if="technologies.length > 0" class="results">
@@ -67,6 +68,7 @@ export default {
       siteType: '',
       screenshotUrl: '',
       error: '',
+      isLoading: false,
       // cache: loadCache(),
     }
   },
@@ -77,7 +79,8 @@ export default {
         this.siteType = '';
         this.screenshotUrl = '';
         this.error = '';
-        const response = await axios.post('https://url-tech-scraper.wilsonfilho.site/api/scrape', { url: this.url });
+        this.isLoading = true;
+        const response = await axios.post('http://localhost:3000/api/scrape', { url: this.url });
         this.technologies = response.data.technologies;
         this.siteType = response.data.siteType;
         this.screenshotUrl = response.data.screenshotUrl;
@@ -86,6 +89,8 @@ export default {
         }
       } catch (error) {
         this.error = 'Erro ao analisar a URL';
+      } finally {
+        this.isLoading = false;
       }
     }
   }
@@ -103,5 +108,15 @@ select {
   color: #fff;
   border: 1px solid #61dafb;
   border-radius: 4px;
+}
+.loading {
+  margin-top: 10px;
+  color: #646cff;
+  font-weight: bold;
+}
+
+button:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
 }
 </style>

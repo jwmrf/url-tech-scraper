@@ -9,7 +9,8 @@ const messages = {
     detectedTechnologies: 'Tecnologias detectadas:',
     siteType: 'Tipo de Site:',
     screenshot: 'Screenshot do Site:',
-    error: 'Erro ao analisar a URL'
+    error: 'Erro ao analisar a URL',
+    loading: 'Analisando o site, por favor aguarde...'
   },
   en: {
     author: 'Author: Wilson Filho',
@@ -19,7 +20,8 @@ const messages = {
     detectedTechnologies: 'Detected technologies:',
     siteType: 'Site Type:',
     screenshot: 'Site Screenshot:',
-    error: 'Error analyzing URL'
+    error: 'Error analyzing URL',
+    loading: 'Analyzing site, please wait...'
   }
 }
 
