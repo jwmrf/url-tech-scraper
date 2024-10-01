@@ -1,3 +1,4 @@
+require('dotenv').config();
 const express = require('express');
 const cors = require('cors');
 const axios = require('axios');
@@ -41,22 +42,26 @@ app.post('/api/scrape', async (req, res) => {
     
     let technologies = [];
     let siteType = 'Não identificado';
-    
-    const browser = await puppeteer.launch({ args: ['--no-sandbox', '--disable-setuid-sandbox'] });
-    const page = await browser.newPage();
-    await page.goto(url, { waitUntil: 'networkidle0' });
-    await page.setViewport({ width: 1280, height: 800 });
-    
-    // Crie a pasta screenshots se não existir
-    if (!fs.existsSync('screenshots')) {
-      fs.mkdirSync('screenshots');
+    let screenshotUrl = null;
+
+    // Verifica se o ambiente é de desenvolvimento
+    if (process.env.ENVIRONMENT !== 'PROD') {
+      const browser = await puppeteer.launch({ args: ['--no-sandbox', '--disable-setuid-sandbox'] });
+      const page = await browser.newPage();
+      await page.goto(url, { waitUntil: 'networkidle0' });
+      await page.setViewport({ width: 1280, height: 800 });
+
+      // Crie a pasta screenshots se não existir
+      if (!fs.existsSync('screenshots')) {
+        fs.mkdirSync('screenshots');
+      }
+
+      const screenshotPath = path.join('screenshots', `${Date.now()}.png`);
+      await page.screenshot({ path: screenshotPath, fullPage: false });
+      await browser.close();
+
+      screenshotUrl = `http://localhost:${port}/${screenshotPath}`;
     }
-
-    const screenshotPath = path.join('screenshots', `${Date.now()}.png`);
-    await page.screenshot({ path: screenshotPath, fullPage: false });
-    await browser.close();
-
-    const screenshotUrl = `http://localhost:${port}/${screenshotPath}`;
     // Função auxiliar para verificar se uma string contém uma substring
     const contains = (str, substr) => str && str.toLowerCase().includes(substr.toLowerCase());
 
