@@ -56,7 +56,6 @@
 <script>
 import axios from 'axios';
 import './styles.css';
-// import { loadCache, saveCache } from './cache';
 
 export default {
   name: 'App',
@@ -69,7 +68,6 @@ export default {
       screenshotUrl: '',
       error: '',
       isLoading: false,
-      // cache: loadCache(),
     }
   },
   methods: {
