@@ -78,7 +78,7 @@ export default {
         this.screenshotUrl = '';
         this.error = '';
         this.isLoading = true;
-        const response = await axios.post('http://localhost:3000/api/scrape', { url: this.url });
+        const response = await axios.post('https://url-tech-scraper.wilsonfilho.site/api/scrape', { url: this.url });
         this.technologies = response.data.technologies;
         this.siteType = response.data.siteType;
         this.screenshotUrl = response.data.screenshotUrl;
