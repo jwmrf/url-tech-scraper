@@ -14,6 +14,7 @@
         <select v-model="$i18n.locale">
           <option value="pt">PT</option>
           <option value="en">EN</option>
+          <option value="ja">日本語</option>
         </select>
       </div>
     </header>
@@ -34,6 +35,12 @@
       <input v-model="url" :placeholder="$t('inputPlaceholder')">
       <button :disabled="isLoading || !url" @click="scrapeUrl">{{ $t('analyzeButton') }}</button>
       <div v-if="isLoading" class="loading">{{ $t('loading') }}</div>
+    </div>
+    <div v-if="!technologies.length">
+      <span>
+        {{ $t('Try With') }}: https://www.permit.io
+      </span>
+      <button :disabled="isLoading" @click="copyExample">{{ $t('copy') }}</button>
     </div>
     <div class="results-container">
       <div v-if="technologies.length > 0" class="results">
@@ -71,6 +78,9 @@ export default {
     }
   },
   methods: {
+    copyExample() {
+      this.url = 'https://www.permit.io';
+    },
     async scrapeUrl() {
       try {
         this.technologies = [];
